@@ -1,31 +1,22 @@
-import pg from "pg";
+import { neon } from "@neondatabase/serverless";
 
-const { Pool } = pg;
-
-let pool: pg.Pool | undefined;
+let sql: ReturnType<typeof neon> | undefined;
 
 /**
- * Reuses a single connection pool across warm function invocations.
- * `max: 1` keeps this friendly to serverless — each concurrent invocation
- * gets its own process, so we don't want to open a big pool per instance.
+ * Neon's HTTP driver — one query per fetch, no persistent connection to
+ * manage. This is the recommended way to talk to Postgres from a
+ * serverless/edge function (works cleanly with esbuild bundling, no native
+ * addons, no connection-pool exhaustion across concurrent invocations).
  */
-export function getPool(): pg.Pool {
-  if (!pool) {
+export function getSql() {
+  if (!sql) {
     const connectionString = process.env.DATABASE_URL;
     if (!connectionString) {
       throw new Error("DATABASE_URL environment variable is not set");
     }
-    pool = new Pool({
-      connectionString,
-      // Most hosted Postgres providers (Neon, Supabase, Render) require SSL
-      // and use certs that Node won't validate by default.
-      ssl: connectionString.includes("sslmode=disable")
-        ? false
-        : { rejectUnauthorized: false },
-      max: 1,
-    });
+    sql = neon(connectionString);
   }
-  return pool;
+  return sql;
 }
 
 export function jsonResponse(data: unknown, init: ResponseInit = {}): Response {
