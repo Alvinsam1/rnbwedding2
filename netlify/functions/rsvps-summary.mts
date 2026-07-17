@@ -1,5 +1,5 @@
 import type { Config } from "@netlify/functions";
-import { getPool, jsonResponse, requireAdmin } from "./_shared.mts";
+import { getSql, jsonResponse, requireAdmin } from "./_shared.mts";
 
 export default async (req: Request) => {
   if (req.method !== "GET") {
@@ -9,15 +9,15 @@ export default async (req: Request) => {
   const unauthorized = requireAdmin(req);
   if (unauthorized) return unauthorized;
 
-  const pool = getPool();
-  const { rows } = await pool.query(`
+  const sql = getSql();
+  const rows = await sql`
     select
       count(*)::int as "totalResponses",
       count(*) filter (where attending = true)::int as "attendingCount",
       count(*) filter (where attending = false)::int as "notAttendingCount",
       coalesce(sum(guest_count) filter (where attending = true), 0)::int as "totalGuests"
     from rsvps
-  `);
+  `;
 
   return jsonResponse(
     rows[0] ?? {
