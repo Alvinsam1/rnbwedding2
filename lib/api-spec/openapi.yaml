@@ -1,0 +1,296 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: rsvps
+    description: RSVP operations
+  - name: messages
+    description: Guestbook message operations
+  - name: photos
+    description: Wedding gallery photo operations
+  - name: storage
+    description: Object storage operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /rsvps:
+    get:
+      operationId: listRsvps
+      tags: [rsvps]
+      summary: List RSVPs
+      responses:
+        "200":
+          description: List of RSVPs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Rsvp"
+    post:
+      operationId: createRsvp
+      tags: [rsvps]
+      summary: Submit an RSVP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RsvpInput"
+      responses:
+        "201":
+          description: Created RSVP
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rsvp"
+
+  /rsvps/summary:
+    get:
+      operationId: getRsvpSummary
+      tags: [rsvps]
+      summary: Get RSVP totals summary
+      responses:
+        "200":
+          description: RSVP summary counts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RsvpSummary"
+
+  /messages:
+    get:
+      operationId: listMessages
+      tags: [messages]
+      summary: List guestbook messages
+      responses:
+        "200":
+          description: List of guest messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuestMessage"
+    post:
+      operationId: createMessage
+      tags: [messages]
+      summary: Post a guestbook message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GuestMessageInput"
+      responses:
+        "201":
+          description: Created message
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GuestMessage"
+
+  /photos:
+    get:
+      operationId: listPhotos
+      tags: [photos]
+      summary: List wedding gallery photos
+      responses:
+        "200":
+          description: List of photos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Photo"
+    post:
+      operationId: createPhoto
+      tags: [photos]
+      summary: Add an uploaded photo to the gallery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhotoInput"
+      responses:
+        "201":
+          description: Created photo
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Photo"
+
+  /storage/uploads/request-url:
+    post:
+      operationId: requestUploadUrl
+      tags: [storage]
+      summary: Request a presigned upload URL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UploadUrlInput"
+      responses:
+        "200":
+          description: Presigned upload URL
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadUrlResponse"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    Rsvp:
+      type: object
+      required: [id, fullName, email, attending, guestCount, createdAt]
+      properties:
+        id:
+          type: integer
+        fullName:
+          type: string
+        email:
+          type: string
+        attending:
+          type: boolean
+        guestCount:
+          type: integer
+        songRequest:
+          type: ["string", "null"]
+        message:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+          format: date-time
+
+    RsvpInput:
+      type: object
+      required: [fullName, email, attending, guestCount]
+      properties:
+        fullName:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+        attending:
+          type: boolean
+        guestCount:
+          type: integer
+          minimum: 1
+        songRequest:
+          type: string
+        message:
+          type: string
+
+    RsvpSummary:
+      type: object
+      required: [totalResponses, attendingCount, notAttendingCount, totalGuests]
+      properties:
+        totalResponses:
+          type: integer
+        attendingCount:
+          type: integer
+        notAttendingCount:
+          type: integer
+        totalGuests:
+          type: integer
+
+    GuestMessage:
+      type: object
+      required: [id, name, message, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    GuestMessageInput:
+      type: object
+      required: [name, message]
+      properties:
+        name:
+          type: string
+          minLength: 1
+        message:
+          type: string
+          minLength: 1
+
+    Photo:
+      type: object
+      required: [id, objectPath, uploaderName, createdAt]
+      properties:
+        id:
+          type: integer
+        objectPath:
+          type: string
+        uploaderName:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+          format: date-time
+
+    PhotoInput:
+      type: object
+      required: [objectPath]
+      properties:
+        objectPath:
+          type: string
+          minLength: 1
+        uploaderName:
+          type: string
+
+    UploadUrlInput:
+      type: object
+      required: [name, size, contentType]
+      properties:
+        name:
+          type: string
+        size:
+          type: integer
+        contentType:
+          type: string
+
+    UploadUrlResponse:
+      type: object
+      required: [uploadURL, objectPath]
+      properties:
+        uploadURL:
+          type: string
+        objectPath:
+          type: string

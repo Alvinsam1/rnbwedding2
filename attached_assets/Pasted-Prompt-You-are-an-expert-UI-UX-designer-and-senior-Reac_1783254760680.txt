@@ -1,0 +1,511 @@
+Prompt
+
+You are an expert UI/UX designer and senior React developer. Build a premium, luxury wedding website that feels like an interactive digital invitation rather than a standard website.
+
+The design should be heavily inspired by the attached wedding invitation and should maintain the exact visual language throughout the experience.
+
+The overall experience should feel cinematic, elegant, romantic, and luxurious.
+
+Think of websites from Apple, Dior, Cartier, Rolls Royce, or luxury hotels—not typical wedding templates.
+
+The website should be fully responsive and optimized for desktop, tablet, and mobile.
+
+Tech Stack
+
+Use:
+
+React
+Vite
+TailwindCSS
+Framer Motion
+GSAP ScrollTrigger
+React Icons
+React Router (if needed)
+React Hook Form
+Firebase or Supabase for backend (structure the project so the backend can easily be connected later)
+
+Write clean reusable components.
+
+Use TypeScript if possible.
+
+Overall Design
+
+Color Palette
+
+Background
+
+Very dark plum
+
+#241326
+
+Secondary background
+
+#321B36
+
+Gold
+
+#D9A441
+
+Cream
+
+#F7F2EB
+
+Text
+
+Soft off-white
+
+Accent
+
+Very subtle gold glow
+
+Avoid bright colors.
+
+The website should feel luxurious.
+
+Typography
+
+Headings
+
+Elegant serif
+
+Names
+
+Beautiful flowing script font
+
+Body
+
+Minimal modern sans-serif
+
+Large spacing between elements.
+
+Lots of whitespace.
+
+Hero Section
+
+This should be the most impressive section.
+
+The attached floral artwork should be used as the hero background.
+
+Do NOT stretch it.
+
+The flowers should remain around the outside edges while keeping the center open for text.
+
+The center should contain:
+
+Save the Date
+
+Together with our families,
+we request the honour of your presence
+
+Ronnell
+
+&
+
+Beullah
+
+Saturday
+November 7, 2026
+
+5 PM
+
+Below that
+
+Animated
+
+"Scroll to Begin"
+
+indicator.
+
+Hero should occupy exactly 100vh.
+
+Hero Animations
+
+Everything should animate slowly.
+
+As page loads
+
+• Background fades in
+
+• Flowers slowly bloom
+
+• Gold particles drift upward
+
+• Title fades upward
+
+• Names reveal letter by letter
+
+• Background subtly zooms from 103% to 100%
+
+• Gold glow gently pulses
+
+• Decorative flourishes fade into view
+
+Nothing should move quickly.
+
+The entire hero should feel alive.
+
+Scroll Effects
+
+Use GSAP ScrollTrigger.
+
+Flowers should move at different speeds creating a layered parallax effect.
+
+Foreground flowers
+
+Move slightly faster.
+
+Background flowers
+
+Move slower.
+
+Particles
+
+Float continuously.
+
+Every section should fade upward into view.
+
+No harsh animations.
+
+Everything should ease smoothly.
+
+Countdown
+
+Large luxury countdown.
+
+Days
+
+Hours
+
+Minutes
+
+Seconds
+
+Use elegant gold typography.
+
+Each number flips smoothly every second.
+
+Our Story
+
+Create a beautiful timeline.
+
+Example
+
+We Met
+
+First Date
+
+The Proposal
+
+Forever Begins
+
+Timeline line should draw itself as user scrolls.
+
+Cards alternate left and right.
+
+Each card contains space for photos.
+
+Wedding Events
+
+Create elegant schedule cards.
+
+Example
+
+Guests Arrive
+
+Ceremony
+
+Cocktail Hour
+
+Reception
+
+Dinner
+
+First Dance
+
+Farewell
+
+Cards animate upward while scrolling.
+
+Venue
+
+Create a premium venue section.
+
+Include
+
+Venue Name
+
+Address
+
+Interactive Google Map
+
+Buttons
+
+Open in Google Maps
+
+Add to Calendar
+
+Map should have rounded corners.
+
+Soft shadow.
+
+Luxury styling.
+
+RSVP
+
+Create a beautiful RSVP form.
+
+Fields
+
+Full Name
+
+Email Address
+
+Will you attend?
+
+Number of Guests
+
+Song Request
+
+Personal Message
+
+Submit button
+
+Gold gradient
+
+Large
+
+Elegant hover animation
+
+After submission
+
+Display beautiful success animation.
+
+Do not use browser alerts.
+
+Gallery Upload
+
+Create a section where guests can upload photos after the wedding.
+
+Requirements
+
+Drag & Drop
+
+Upload multiple images
+
+Upload progress
+
+Preview images
+
+Store images using Supabase Storage (leave backend integration ready).
+
+Wedding Gallery
+
+Display uploaded images using a masonry layout.
+
+Hover effects
+
+Small zoom
+
+Soft shadow
+
+Gold outline
+
+Clicking opens fullscreen lightbox.
+
+Arrow navigation.
+
+Keyboard navigation.
+
+Guest Messages
+
+Create a digital guestbook.
+
+Guests leave messages.
+
+Messages display as beautiful cards.
+
+Cards fade upward when loaded.
+
+Footer
+
+Large ending section.
+
+Centered.
+
+"We Can't Wait To Celebrate With You"
+
+Ronnell
+
+&
+
+Beullah
+
+Small gold monogram.
+
+Very elegant.
+
+Background Effects
+
+Create subtle floating gold particles.
+
+Do NOT overdo them.
+
+Around 15-20 particles.
+
+Random movement.
+
+Very slow.
+
+Very soft opacity.
+
+Cursor Effects
+
+Desktop only.
+
+Very soft golden glow follows mouse.
+
+No lag.
+
+Very subtle.
+
+Hover Effects
+
+Buttons
+
+Slight lift
+
+Soft glow
+
+Gold gradient
+
+Cards
+
+Tiny lift
+
+Shadow
+
+Images
+
+Zoom to 105%
+
+Gold border glow
+
+Navigation
+
+Transparent navigation.
+
+Sticky.
+
+Contains
+
+Home
+
+Our Story
+
+Events
+
+Venue
+
+RSVP
+
+Gallery
+
+Navigation should change from transparent to blurred glass effect while scrolling.
+
+Smooth scroll to sections.
+
+Mobile Experience
+
+Perfect responsiveness.
+
+Reduce flower sizes.
+
+Keep typography elegant.
+
+Animations should remain smooth.
+
+Navigation becomes hamburger menu.
+
+Performance
+
+Use lazy loading.
+
+Optimize all images.
+
+Keep animations at 60 FPS.
+
+Minimize unnecessary rerenders.
+
+Code Structure
+
+/components
+
+Hero
+
+Countdown
+
+StoryTimeline
+
+EventTimeline
+
+Venue
+
+RSVP
+
+Gallery
+
+PhotoUpload
+
+GuestMessages
+
+Footer
+
+Navbar
+
+LoadingScreen
+
+ParticleBackground
+
+ParallaxFlowers
+
+Button
+
+SectionTitle
+
+Container
+
+/hooks
+
+/useScrollAnimations
+
+/useCountdown
+
+/useMouseGlow
+
+/assets
+
+/images
+
+/fonts
+
+/icons
+
+Extra Details
+
+Create a loading screen.
+
+Display an elegant gold RB monogram.
+
+A thin gold circle slowly draws around it.
+
+Fade into the hero after assets load.
+
+Create subtle page transitions.
+
+Every section should feel like turning the page of a luxury wedding invitation.
+
+Keep all spacing generous.
+
+Avoid clutter.
+
+The website should feel calm, elegant, expensive, and immersive.
