@@ -13,9 +13,22 @@
 [functions]
   node_bundler = "esbuild"
 
+# API routes — explicit + forced so they always win over the SPA
+# catch-all below, regardless of routing order.
+[[redirects]]
+  from = "/api/rsvps/summary"
+  to = "/.netlify/functions/rsvps-summary"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/rsvps"
+  to = "/.netlify/functions/rsvps"
+  status = 200
+  force = true
+
 # Client-side routing (wouter) — let index.html handle unknown paths.
-# The RSVP/admin API paths above are registered directly by the functions'
-# own `config.path`, so they're matched before this catch-all.
+# Must stay LAST: redirects are matched top-to-bottom, first match wins.
 [[redirects]]
   from = "/*"
   to = "/index.html"
