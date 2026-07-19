@@ -135,7 +135,7 @@ export function Story() {
                     <img
                       src={event.image}
                       alt={event.title}
-                      className="w-full object-cover aspect-[3/4] grayscale-[15%] saturate-[85%] brightness-[0.88] sepia-[12%]"
+                      className="w-full object-cover aspect-square grayscale-[15%] saturate-[85%] brightness-[0.88] sepia-[12%]"
                     />
                   </motion.div>
                 </div>
