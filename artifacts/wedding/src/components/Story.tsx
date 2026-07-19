@@ -7,10 +7,10 @@ import leaf3 from "@/assets/floral/3.png";
 import leaf4 from "@/assets/floral/4.png";
 import flower from "@/assets/floral/6.png";
 import bouquet from "@/assets/floral/7.png";
-import weMet from "@assets/we_met_1783858263104.jpeg";
-import firstDate from "@assets/First_date_1783858263102.jpeg";
-import theProposal from "@assets/the_proposal_1783858263101.jpeg";
-import foreverBegins from "@assets/forever_Begins_1783858263103.jpeg";
+import weMet from "@assets/we_met_1783858263104.png";
+import firstDate from "@assets/First_date_1783858263102.png";
+import theProposal from "@assets/the_proposal_1783858263101.png";
+import foreverBegins from "@assets/forever_Begins_1783858263103.png";
 
 const timeline = [
   {
