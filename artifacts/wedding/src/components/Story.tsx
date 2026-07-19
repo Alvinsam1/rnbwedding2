@@ -124,7 +124,7 @@ export function Story() {
                 {/* Image side */}
                 <div className="w-full md:w-[45%] flex justify-center px-6 py-4">
                   <motion.div
-                    className="relative w-full max-w-xs overflow-hidden"
+                    className="relative w-full max-w-md overflow-hidden"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.5 }}
                   >
