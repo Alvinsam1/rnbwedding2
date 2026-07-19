@@ -18,7 +18,7 @@ export function Footer() {
           transition={{ duration: 1 }}
           className="max-w-2xl mx-auto"
         >
-          <h2 className="font-serif text-3xl md:text-5xl text-foreground mb-12 leading-relaxed">
+          <h2 className="font-serif text-2xl md:text-4xl text-foreground mb-12 leading-relaxed">
             We Can't Wait To <br />
             <span className="text-primary italic">Celebrate With You</span>
           </h2>
